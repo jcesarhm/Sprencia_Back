@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SPRENCIA.Domain.Models
 {
@@ -21,7 +16,7 @@ namespace SPRENCIA.Domain.Models
         public DateTime Date { get; set; }
 
         [ForeignKey("ActivityId")]
-        public int ActivityId { get; set; }
+        public int? ActivityId { get; set; }
         public Activity Activity { get; set; }
     }
 }
