@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace SPRENCIA.Infraestructure.Contracts
 {
-    public interface IActivity
+    public interface ICommentRepository
     {
-        Task<List<Activity>> GetAll();
+        Task<List<Comment>> GetAll();
     }
 }
