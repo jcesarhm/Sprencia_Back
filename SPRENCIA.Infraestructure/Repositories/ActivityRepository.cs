@@ -4,7 +4,7 @@ using SPRENCIA.Infraestructure.Contracts;
 
 namespace SPRENCIA.Infraestructure.Repositories
 {
-    public class ActivityRepository : IActivity
+    public class ActivityRepository : IActivityRepository
     {
         // Privatizar el contexto
         private readonly SprenciaDbContext _context;

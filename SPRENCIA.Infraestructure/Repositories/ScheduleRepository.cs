@@ -4,22 +4,20 @@ using SPRENCIA.Infraestructure.Contracts;
 
 namespace SPRENCIA.Infraestructure.Repositories
 {
-    public class CommentRepository : ICommentRepository
-    { 
+    internal class ScheduleRepository : IScheduleRepository
+    {
         private readonly SprenciaDbContext _context;
 
-        public CommentRepository(SprenciaDbContext dbcontext)
+        public ScheduleRepository(SprenciaDbContext dbcontext)
         {
             _context = dbcontext;
         }
-    
 
-    
-        public async Task<List<Comment>> GetAll()
+        public Task<List<Schedule>> GetAll()
         {
-            var comments = await _context.Comments.ToListAsync();
+            var schedules = _context.Schedules.ToListAsync();
 
-            return comments;
+            return schedules;
         }
     }
 }
