@@ -4,7 +4,7 @@ using SPRENCIA.Infraestructure.Contracts;
 
 namespace SPRENCIA.Infraestructure.Repositories
 {
-    internal class ScheduleRepository : IScheduleRepository
+    public class ScheduleRepository : IScheduleRepository
     {
         private readonly SprenciaDbContext _context;
 
