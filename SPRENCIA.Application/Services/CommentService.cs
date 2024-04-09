@@ -14,24 +14,26 @@ namespace SPRENCIA.Application.Services
             _commentRepository = commentRepository;
         }
 
-        public async Task<CommentDto> AddNewComment(CommentAddRequestDto commentAddRequestDto)
-        {
-            CommentDto commentAdded = null; 
-
-           if (commentAddRequestDto != null)
-            {
-                commentAdded = await  _commentRepository.AddComment(commentAddRequestDto);
-            }
-
-            return commentAdded;
-        }
-
         public async Task<List<Comment>> GetAllComments()
         {
             var AllComments = await _commentRepository.GetAll();
 
             return AllComments;
         }
+
+        public async Task<CommentDto> AddNewComment(CommentAddRequestDto newComment)
+        {
+            CommentDto? commentAdded = null; 
+
+           if (newComment != null)
+            {
+                commentAdded = await  _commentRepository.AddComment(newComment);
+            }
+
+            return commentAdded;
+        }
+
+       
     }
 }
 
