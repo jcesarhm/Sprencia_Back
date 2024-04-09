@@ -6,33 +6,33 @@ using SPRENCIA.Infraestructure.Contracts.DTOs;
 namespace SPRENCIA_API.Controllers
 {
     [Route("api/[controller]")]
-    public class ActivityController : ControllerBase
+    public class CommentController : ControllerBase
     {
-        private readonly IActivityService _activityService;
+        private readonly ICommentService _commentService;
 
-        public ActivityController(IActivityService activityService)
+        public CommentController(ICommentService commentService)
         {
             //Hacemos la conexion entre Controller y Service
-            _activityService = activityService;
+            _commentService = commentService;
         }
         [HttpGet]
-        public async Task<List<Activity>> GetAll() 
+        public async Task<List<Comment>> GetAll() 
         {
             // Controladores solamente tiene que llamar a servicios.
             // No debe de hacer ninguna operacion.
-            var getAllActivity = await _activityService.GetAllActivities();
+            var getAllComment = await _commentService.GetAllComments();
 
-            return getAllActivity;
+            return getAllComment;
         }
 
         [HttpPost]
-        [Route("AddActivity")]
+        [Route("AddComment")]
         //REcuerda poner el ActionResult
-        public async Task<ActionResult> AddNewActivity([FromBody] ActivityAddRequestDto activity)
+        public async Task<ActionResult> AddNewComment([FromBody] CommentAddRequestDto comment)
         {
-            var activityAdded = await _activityService.AddNewActivity(activity);
+            var commentAdded = await _commentService.AddNewComment(comment);
 
-            if(activityAdded == null) 
+            if(commentAdded == null) 
 
             {
 
@@ -42,7 +42,7 @@ namespace SPRENCIA_API.Controllers
             else
             {
                 //Aqui ha ido todo bien 
-                return Ok(activityAdded);
+                return Ok(commentAdded);
             }
            
         }
