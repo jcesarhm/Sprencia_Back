@@ -29,8 +29,8 @@ namespace SPRENCIA.CrossCutting.Configuration
         {
             //Establecer las conexiones de servicios
             services.AddTransient<IActivityService, ActivityService>();
-            services.AddTransient<ICommentRepository, CommentRepository>();
-            services.AddTransient<IScheduleRepository, ScheduleRepository>();
+            services.AddTransient<ICommentService, CommentService>();
+            services.AddTransient<IScheduleService, ScheduleService>();
             
             return services;
         }

@@ -14,8 +14,18 @@ namespace SPRENCIA.Infraestructure.Repositories
             _context = dbcontext;
         }
 
-        public async Task<CommentDto> AddComment(CommentAddRequestDto commentAddRequestDto)
+        public async Task<List<Comment>> GetAll()
         {
+            //Crear la Consulta LINQ
+            var comments = await _context.Comments.ToListAsync();
+
+            return comments;
+
+        }
+
+        public async Task<CommentDto> AddComment(CommentAddRequestDto newComment)
+        {
+            CommentAddRequestDto commentAddRequestDto = newComment;
           Comment comment = new Comment();
             comment.Date = commentAddRequestDto.Date;
             comment.ActivityId = commentAddRequestDto.ActivityId;
@@ -39,11 +49,5 @@ namespace SPRENCIA.Infraestructure.Repositories
 
         }
 
-        public async Task<List<Comment>> GetAll()
-        {
-            var comments = await _context.Comments.ToListAsync();
-
-            return comments;
-        }
     }
 }

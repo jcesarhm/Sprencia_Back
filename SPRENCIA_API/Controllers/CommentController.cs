@@ -24,7 +24,7 @@ namespace SPRENCIA_API.Controllers
 
             return getAllComment;
         }
-
+        
         [HttpPost]
         [Route("AddComment")]
         //REcuerda poner el ActionResult
