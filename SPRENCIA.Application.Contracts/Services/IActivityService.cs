@@ -1,4 +1,5 @@
 ﻿using SPRENCIA.Domain.Models;
+using SPRENCIA.Infraestructure.Contracts.DTOs;
 
 namespace SPRENCIA.Application.Contracts.Services
 {
@@ -6,5 +7,7 @@ namespace SPRENCIA.Application.Contracts.Services
     {
 
         Task<List<Activity>> GetAllActivities();
+        Task<ActivityDto> AddNewActivity(ActivityAddRequestDto newActivity);
+
     }
 }

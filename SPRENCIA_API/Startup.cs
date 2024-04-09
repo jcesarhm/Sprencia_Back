@@ -32,7 +32,7 @@ namespace SPRENCIA_API
                 cfg.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo
                 {
                     Version = "1.0",
-                    Title = "Pacman Gestiones de reservas restaurante"
+                    Title = "Sprencia Gestión de Actividades"
                 });
             });
         }
@@ -52,7 +52,7 @@ namespace SPRENCIA_API
 
             app.UseSwaggerUI(cfg =>
             {
-                cfg.SwaggerEndpoint("./v1/swagger.json", "PacmanApi net core curso.Net");
+                cfg.SwaggerEndpoint("./v1/swagger.json", "SprenciaDb");
             });
 
             app.UseHttpsRedirection();
