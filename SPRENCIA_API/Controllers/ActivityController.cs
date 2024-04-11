@@ -2,6 +2,7 @@
 using SPRENCIA.Application.Contracts.Services;
 using SPRENCIA.Domain.Models;
 using SPRENCIA.Infraestructure.Contracts.DTOs;
+using System.Reflection.Metadata.Ecma335;
 
 namespace SPRENCIA_API.Controllers
 {
@@ -46,7 +47,12 @@ namespace SPRENCIA_API.Controllers
             }
            
         }
-
-      
+        [HttpGet("{activityId}")]
+        public async Task<ActionResult> GetActivityById(int activityId)
+        {
+            var activityById = _activityService.GetActivityById(activityId);
+            return Ok(activityById);
+        }
+        
     }
 }

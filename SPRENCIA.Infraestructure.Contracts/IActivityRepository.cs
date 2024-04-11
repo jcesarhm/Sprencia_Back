@@ -7,5 +7,7 @@ namespace SPRENCIA.Infraestructure.Contracts
     {
         Task<List<Activity>> GetAll();
         Task<ActivityDto> AddActivity(ActivityAddRequestDto newActivity);
+
+        Task<Activity> GetActivityById(int activityId);
     }
 }
