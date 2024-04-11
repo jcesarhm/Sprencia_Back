@@ -9,5 +9,6 @@ namespace SPRENCIA.Application.Contracts.Services
         Task<List<Activity>> GetAllActivities();
         Task<ActivityDto> AddNewActivity(ActivityAddRequestDto newActivity);
 
+        Task<Activity> GetActivityById(int activityId);
     }
 }

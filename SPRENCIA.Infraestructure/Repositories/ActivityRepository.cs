@@ -2,6 +2,7 @@
 using SPRENCIA.Domain.Models;
 using SPRENCIA.Infraestructure.Contracts;
 using SPRENCIA.Infraestructure.Contracts.DTOs;
+using System;
 
 namespace SPRENCIA.Infraestructure.Repositories
 {
@@ -52,6 +53,15 @@ namespace SPRENCIA.Infraestructure.Repositories
 
             return activityDto;
 
+        }
+
+      
+
+        public async Task<Activity> GetActivityById(int activityId)
+        {
+            Activity? activity = _context.Activities.Where(x => x.Id == activityId).FirstOrDefault();
+
+            return activity;
         }
     }
 }
