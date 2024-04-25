@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SPRENCIA.Application.Contracts.Services;
+using SPRENCIA.Application.Services;
 using SPRENCIA.Domain.Models;
 using SPRENCIA.Infraestructure.Contracts.DTOs;
 
@@ -25,6 +26,15 @@ namespace SPRENCIA_API.Controllers
             return getAllComment;
         }
         
+      
+
+        [HttpGet("{commentId}")]
+        public async Task<ActionResult> GetCommentById(int commentId)
+        {
+            var commentById =  _commentService.GetCommentById(commentId);
+            return Ok(commentById);
+        }
+
         [HttpPost]
         [Route("AddComment")]
         //REcuerda poner el ActionResult
@@ -32,7 +42,7 @@ namespace SPRENCIA_API.Controllers
         {
             var commentAdded = await _commentService.AddNewComment(comment);
 
-            if(commentAdded == null) 
+            if (commentAdded == null)
 
             {
 
@@ -44,9 +54,38 @@ namespace SPRENCIA_API.Controllers
                 //Aqui ha ido todo bien 
                 return Ok(commentAdded);
             }
-           
+
         }
 
-      
+
+        [HttpDelete("{commentId}")]
+
+        public async Task<ActionResult> DeleteCommentById(int commentId)
+        {
+            Comment? comment = await _commentService.DeleteCommentById(commentId);
+
+            if (comment == null)
+            {
+                return BadRequest(" la peticion es incorrecta");
+            }
+
+            return Ok(comment);
+
+        }
+
+        [HttpPut]
+        [Route("ModifyComment")]
+
+        public async Task<ActionResult> ModifyCommentById([FromBody] CommentModifyRequestDto commentModifyRequestDto)
+        {
+            CommentDto? commentModify = await _commentService.ModifyCommentById(commentModifyRequestDto);
+            if (commentModify == null)
+            {
+                return BadRequest("la peticion es incorrecta");
+            }
+
+            return Ok(commentModify);
+        }
+
     }
 }

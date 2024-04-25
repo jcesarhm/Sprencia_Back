@@ -17,8 +17,6 @@ namespace SPRENCIA.Infraestructure.Repositories
             _context = dbContext;
         }
 
-
-
         public async Task<List<Activity>> GetAll()
         {
             //Crear la Consulta LINQ
@@ -55,13 +53,55 @@ namespace SPRENCIA.Infraestructure.Repositories
 
         }
 
-      
-
         public async Task<Activity> GetActivityById(int activityId)
         {
             Activity? activity = _context.Activities.Where(x => x.Id == activityId).FirstOrDefault();
 
+            ActivityDto activityDto = new ActivityDto();
+
+            activityDto.Id = activity.Id;
+            activityDto.Name = activity.Name;
+            activityDto.Description = activity.Description;
+            activityDto.Prices = activity.Prices;
+            activityDto.Summary = activity.Summary;
+
+
             return activity;
+        }
+
+        public async Task<Activity> DeleteActivityById(int activityId)
+        {
+           Activity? activity =  _context.Activities.Where( x => x.Id == activityId).FirstOrDefault();
+           _context.Remove(activity);
+            await _context.SaveChangesAsync();
+
+            return activity;
+        }
+
+        public async Task<ActivityDto> ModifyActivityById(ActivityModifyRequestDto activityModifyRequestDto)
+        {
+           Activity? activityResult = _context.Activities.Where(x => x.Id == activityModifyRequestDto.Id).FirstOrDefault();
+
+          
+            activityResult.Name = activityModifyRequestDto.Name;
+            activityResult.Description = activityModifyRequestDto.Description;
+            activityResult.Prices = activityModifyRequestDto.Prices;
+            activityResult.Summary = activityModifyRequestDto.Summary;
+      
+
+            _context.Activities.Update(activityResult);
+            _context.SaveChanges();
+
+            ActivityDto activityDto = new ActivityDto();
+            activityDto.Id = activityModifyRequestDto.Id;
+            activityDto.Name = activityModifyRequestDto.Name;
+            activityDto.Description = activityModifyRequestDto.Description;
+            activityDto.Prices = activityModifyRequestDto.Prices;
+            activityDto.Summary = activityModifyRequestDto.Summary;
+
+            return activityDto;
+        
+
         }
     }
 }

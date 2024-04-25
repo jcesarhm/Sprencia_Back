@@ -6,13 +6,18 @@ using System.Threading.Tasks;
 
 namespace SPRENCIA.Infraestructure.Contracts.DTOs
 {
-    public class ActivityAddRequestDto
+    public class CommentModifyRequestDto
     {
-        public string Name { get; set; }
-        public string Description { get; set; }
-        public int Prices { get; set; }
-        public string Summary { get; set; }
+        public int Id { get; set; }
 
-        
+        public string Name { get; set; }
+
+        public string Detail { get; set; }
+
+        public int Qualification { get; set; }
+
+        public DateTime Date { get; set; }
+
+
     }
 }
