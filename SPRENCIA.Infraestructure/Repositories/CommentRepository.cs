@@ -49,5 +49,53 @@ namespace SPRENCIA.Infraestructure.Repositories
 
         }
 
+        public async Task<Comment> GetCommentById(int CommentId)
+        {
+            Comment? comment = _context.Comments.Where(x => x.Id == CommentId).FirstOrDefault();
+
+            CommentDto commentDto = new CommentDto();
+
+            commentDto.Id = comment.Id;
+            commentDto.Name = comment.Name;
+            commentDto.Date = comment.Date;
+            commentDto.ActivityId = comment.ActivityId;
+            commentDto.Detail = comment.Detail;
+            comment.Qualification = comment.Qualification;
+
+            return comment;
+        }
+
+        public async Task<Comment> DeleteCommentById(int commentId)
+        {
+            Comment? comment = _context.Comments.Where(x => x.Id == commentId).FirstOrDefault();
+            _context.Remove(comment);
+            await _context.SaveChangesAsync();
+
+            return comment;
+        }
+
+        public  async Task<CommentDto> ModifyCommentById(CommentModifyRequestDto commentModifyRequestDto)
+        {
+            Comment? commentResult = _context.Comments.Where(x => x.Id == commentModifyRequestDto.Id).FirstOrDefault();
+
+
+            commentResult.Name = commentModifyRequestDto.Name;
+            commentResult.Detail = commentModifyRequestDto.Detail;
+            commentResult.Qualification = commentModifyRequestDto.Qualification;
+          
+
+
+            _context.Comments.Update(commentResult);
+            _context.SaveChanges();
+
+            CommentDto commentDto = new CommentDto();
+            commentDto.Id = commentModifyRequestDto.Id;
+            commentDto.Name = commentModifyRequestDto.Name;
+            commentDto.Detail = commentModifyRequestDto.Detail;
+            commentDto.Qualification = commentModifyRequestDto.Qualification;
+  
+
+            return commentDto;
+        }
     }
 }

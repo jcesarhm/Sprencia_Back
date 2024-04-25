@@ -33,7 +33,38 @@ namespace SPRENCIA.Application.Services
             return commentAdded;
         }
 
-       
+        public async Task<Comment> GetCommentById(int commentId)
+        {
+            Comment comment = null;
+            if (commentId != null)
+            {
+                comment = await _commentRepository.GetCommentById(commentId);
+            }
+
+            return comment;
+        }
+
+        public async Task<Comment> DeleteCommentById(int commentId)
+        {
+            Comment commentDelete = null;
+            if (commentId != null)
+            {
+                commentDelete = await _commentRepository.DeleteCommentById(commentId);
+            }
+
+            return commentDelete;
+        }
+
+        public  async Task<CommentDto> ModifyCommentById(CommentModifyRequestDto commentModifyRequestDto)
+        {
+            CommentDto? commentModify = null;
+            if (commentModifyRequestDto != null) 
+            { 
+                commentModify = await _commentRepository.ModifyCommentById(commentModifyRequestDto);
+            }
+
+            return commentModify;
+        }
     }
 }
 

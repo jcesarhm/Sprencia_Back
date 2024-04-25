@@ -43,5 +43,27 @@ namespace SPRENCIA.Application.Services
 
             return activity;
         }
+
+        public async Task<Activity> DeleteActivityById(int activityId)
+        {
+            Activity activityDelete = null;
+            if (activityId != null)
+            {
+                activityDelete = await _activityRepository.DeleteActivityById(activityId);
+            }
+
+            return activityDelete;
+        }
+
+        public async Task<ActivityDto> ModifyActivityById(ActivityModifyRequestDto activityModifyRequestDto)
+        {
+            ActivityDto? activityModify = null;
+            if (activityModifyRequestDto != null)
+            {
+                activityModify = await _activityRepository.ModifyActivityById(activityModifyRequestDto);
+            }
+
+            return activityModify;
+        }
     }
 }

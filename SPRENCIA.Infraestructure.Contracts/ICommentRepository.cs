@@ -8,5 +8,11 @@ namespace SPRENCIA.Infraestructure.Contracts
         Task<List<Comment>> GetAll();
 
         Task<CommentDto> AddComment(CommentAddRequestDto newComment);
+
+        Task<Comment> GetCommentById(int CommentId);
+
+        Task<Comment> DeleteCommentById(int commentId);
+
+        Task<CommentDto> ModifyCommentById(CommentModifyRequestDto commentModifyRequestDto );
     }
 }

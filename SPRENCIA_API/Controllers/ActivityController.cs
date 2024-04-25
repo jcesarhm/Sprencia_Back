@@ -26,6 +26,14 @@ namespace SPRENCIA_API.Controllers
             return getAllActivity;
         }
 
+        [HttpGet("{activityId}")]
+        public async Task<ActionResult> GetActivityById(int activityId)
+        {
+            var activityById = _activityService.GetActivityById(activityId);
+            return Ok(activityById);
+        }
+
+
         [HttpPost]
         [Route("AddActivity")]
         //REcuerda poner el ActionResult
@@ -33,7 +41,7 @@ namespace SPRENCIA_API.Controllers
         {
             var activityAdded = await _activityService.AddNewActivity(activity);
 
-            if(activityAdded == null) 
+            if (activityAdded == null)
 
             {
 
@@ -45,14 +53,36 @@ namespace SPRENCIA_API.Controllers
                 //Aqui ha ido todo bien 
                 return Ok(activityAdded);
             }
-           
+
         }
-        [HttpGet("{activityId}")]
-        public async Task<ActionResult> GetActivityById(int activityId)
+
+        [HttpDelete ("{activityId}")]
+
+        public async Task<ActionResult> DeleteActivityById(int activityId)
         {
-            var activityById = _activityService.GetActivityById(activityId);
-            return Ok(activityById);
+            Activity? activity = await _activityService.DeleteActivityById(activityId);
+           
+            if (activity == null)
+            {
+                return BadRequest(" la peticion es incorrecta");
+            }
+
+            return Ok(activity);
+  
         }
-        
+
+        [HttpPut]
+        [Route("ModifyActivity")]
+
+        public async Task<ActionResult> ModifyActivityById([FromBody] ActivityModifyRequestDto activityModifyRequestDto)
+        {
+            ActivityDto? activityModify = await _activityService.ModifyActivityById(activityModifyRequestDto);
+            if (activityModify == null)
+            {
+                return BadRequest("la peticion es incorrecta");
+            }
+
+            return Ok(activityModify);
+        }
     }
 }
