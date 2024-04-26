@@ -49,11 +49,12 @@ namespace SPRENCIA.Infraestructure.Repositories
 
         }
 
-        public async Task<Comment> GetCommentById(int CommentId)
+        public async Task<CommentDto> GetCommentById(int commentId)
         {
-            Comment? comment = _context.Comments.Where(x => x.Id == CommentId).FirstOrDefault();
+            Comment? comment = _context.Comments.Where(x => x.Id == commentId).FirstOrDefault();
 
             CommentDto commentDto = new CommentDto();
+            if(comment == null) { return null; }
 
             commentDto.Id = comment.Id;
             commentDto.Name = comment.Name;
@@ -62,16 +63,15 @@ namespace SPRENCIA.Infraestructure.Repositories
             commentDto.Detail = comment.Detail;
             comment.Qualification = comment.Qualification;
 
-            return comment;
+            return commentDto;
         }
 
-        public async Task<Comment> DeleteCommentById(int commentId)
+        public async Task DeleteCommentById(int? commentId)
         {
             Comment? comment = _context.Comments.Where(x => x.Id == commentId).FirstOrDefault();
             _context.Remove(comment);
             await _context.SaveChangesAsync();
 
-            return comment;
         }
 
         public  async Task<CommentDto> ModifyCommentById(CommentModifyRequestDto commentModifyRequestDto)

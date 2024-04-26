@@ -11,6 +11,6 @@ namespace SPRENCIA.Application.Contracts.Services
 
         Task<Schedule> AddNewSchedule(Schedule newSchedule);
 
-        Task<Schedule> DeleteScheduleById(int scheduleId);
+        Task DeleteScheduleById(int? scheduleId);
     }
 }

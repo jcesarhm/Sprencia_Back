@@ -29,7 +29,7 @@ namespace SPRENCIA_API.Controllers
       
 
         [HttpGet("{commentId}")]
-        public async Task<ActionResult> GetCommentById(int commentId)
+        public async Task<ActionResult<CommentDto>> GetCommentById(int commentId)
         {
             var commentById =  _commentService.GetCommentById(commentId);
             return Ok(commentById);
@@ -62,14 +62,11 @@ namespace SPRENCIA_API.Controllers
 
         public async Task<ActionResult> DeleteCommentById(int commentId)
         {
-            Comment? comment = await _commentService.DeleteCommentById(commentId);
+           await _commentService.DeleteCommentById(commentId);
 
-            if (comment == null)
-            {
-                return BadRequest(" la peticion es incorrecta");
-            }
+           
 
-            return Ok(comment);
+            return Ok();
 
         }
 

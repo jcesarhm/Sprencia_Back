@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SPRENCIA.Domain.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,6 +14,9 @@ namespace SPRENCIA.Infraestructure.Contracts.DTOs
         public string Description { get; set; }
         public int Prices { get; set; }
         public string Summary { get; set; }
+
+        public  int? ScheduleId { get; set; }
+        public string ScheduleName { get; set; }
         
     }
 }

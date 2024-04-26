@@ -8,9 +8,9 @@ namespace SPRENCIA.Infraestructure.Contracts
         Task<List<Activity>> GetAll();
         Task<ActivityDto> AddActivity(ActivityAddRequestDto newActivity);
 
-        Task<Activity> GetActivityById(int activityId);
+        Task<ActivityDto> GetActivityById(int activityId);
 
-        Task<Activity> DeleteActivityById(int ActivityId);
+        Task DeleteActivityById(int? ActivityId);
 
         Task<ActivityDto> ModifyActivityById(ActivityModifyRequestDto activityModifyRequestDto);
 
