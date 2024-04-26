@@ -17,7 +17,7 @@ namespace SPRENCIA_API.Controllers
             _activityService = activityService;
         }
         [HttpGet]
-        public async Task<List<Activity>> GetAll() 
+        public async Task<List<Activity>> GetAll()
         {
             // Controladores solamente tiene que llamar a servicios.
             // No debe de hacer ninguna operacion.
@@ -27,9 +27,9 @@ namespace SPRENCIA_API.Controllers
         }
 
         [HttpGet("{activityId}")]
-        public async Task<ActionResult> GetActivityById(int activityId)
+        public async Task<ActionResult<ActivityDto>> GetActivityById(int activityId)
         {
-            var activityById = _activityService.GetActivityById(activityId);
+            var activityById = await _activityService.GetActivityById(activityId);
             return Ok(activityById);
         }
 
@@ -60,14 +60,11 @@ namespace SPRENCIA_API.Controllers
 
         public async Task<ActionResult> DeleteActivityById(int activityId)
         {
-            Activity? activity = await _activityService.DeleteActivityById(activityId);
+            await _activityService.DeleteActivityById(activityId);
            
-            if (activity == null)
-            {
-                return BadRequest(" la peticion es incorrecta");
-            }
+        
 
-            return Ok(activity);
+            return Ok();
   
         }
 

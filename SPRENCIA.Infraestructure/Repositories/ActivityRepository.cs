@@ -21,7 +21,9 @@ namespace SPRENCIA.Infraestructure.Repositories
         {
             //Crear la Consulta LINQ
             var activities = await _context.Activities.ToListAsync();
-
+            
+            /// mapear cada uno de los elemntos del array en un Dto.
+            
             return activities;
             
         }
@@ -53,12 +55,15 @@ namespace SPRENCIA.Infraestructure.Repositories
 
         }
 
-        public async Task<Activity> GetActivityById(int activityId)
+        public async Task<ActivityDto> GetActivityById(int activityId)
         {
             Activity? activity = _context.Activities.Where(x => x.Id == activityId).FirstOrDefault();
 
             ActivityDto activityDto = new ActivityDto();
-
+            if(activity == null)
+            {
+                return null;
+            }
             activityDto.Id = activity.Id;
             activityDto.Name = activity.Name;
             activityDto.Description = activity.Description;
@@ -66,16 +71,16 @@ namespace SPRENCIA.Infraestructure.Repositories
             activityDto.Summary = activity.Summary;
 
 
-            return activity;
+            return activityDto;
         }
 
-        public async Task<Activity> DeleteActivityById(int activityId)
+        public async Task DeleteActivityById(int? activityId)
         {
            Activity? activity =  _context.Activities.Where( x => x.Id == activityId).FirstOrDefault();
            _context.Remove(activity);
             await _context.SaveChangesAsync();
 
-            return activity;
+           
         }
 
         public async Task<ActivityDto> ModifyActivityById(ActivityModifyRequestDto activityModifyRequestDto)
@@ -88,16 +93,21 @@ namespace SPRENCIA.Infraestructure.Repositories
             activityResult.Prices = activityModifyRequestDto.Prices;
             activityResult.Summary = activityModifyRequestDto.Summary;
       
-
             _context.Activities.Update(activityResult);
             _context.SaveChanges();
+            /// GetActivityById
+            /// _context.Activities.Where(x => x.Id == activityModifyRequestDto.Id).FirstOrDefault();
+
+            Activity? activityModify = _context.Activities.Where(x => x.Id == activityModifyRequestDto.Id).FirstOrDefault();
 
             ActivityDto activityDto = new ActivityDto();
-            activityDto.Id = activityModifyRequestDto.Id;
-            activityDto.Name = activityModifyRequestDto.Name;
-            activityDto.Description = activityModifyRequestDto.Description;
-            activityDto.Prices = activityModifyRequestDto.Prices;
-            activityDto.Summary = activityModifyRequestDto.Summary;
+            activityDto.Id = activityModify.Id;
+            activityDto.Name = activityModify.Name;
+            activityDto.Description = activityModify.Description;
+            activityDto.Prices = activityModify.Prices;
+            activityDto.Summary = activityModify.Summary;
+            activityDto.ScheduleId = activityModify.ScheduleId;
+            /// activity
 
             return activityDto;
         

@@ -33,9 +33,9 @@ namespace SPRENCIA.Application.Services
             return commentAdded;
         }
 
-        public async Task<Comment> GetCommentById(int commentId)
+        public async Task<CommentDto> GetCommentById(int commentId)
         {
-            Comment comment = null;
+            CommentDto comment = null;
             if (commentId != null)
             {
                 comment = await _commentRepository.GetCommentById(commentId);
@@ -44,15 +44,13 @@ namespace SPRENCIA.Application.Services
             return comment;
         }
 
-        public async Task<Comment> DeleteCommentById(int commentId)
+        public async Task DeleteCommentById(int? commentId)
         {
-            Comment commentDelete = null;
+            
             if (commentId != null)
             {
-                commentDelete = await _commentRepository.DeleteCommentById(commentId);
+           await _commentRepository.DeleteCommentById(commentId);
             }
-
-            return commentDelete;
         }
 
         public  async Task<CommentDto> ModifyCommentById(CommentModifyRequestDto commentModifyRequestDto)

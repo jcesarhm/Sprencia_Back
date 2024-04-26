@@ -24,13 +24,13 @@ namespace SPRENCIA.Infraestructure.Repositories
             return scheduleAdded.Entity;
         }
 
-        public async Task<Schedule> DeleteScheduleById(int scheduleId)
+        public async Task DeleteScheduleById(int? scheduleId)
         {
             Schedule? schedule = _context.Schedules.Where(x => x.Id == scheduleId).FirstOrDefault();
             _context.Remove(schedule);
             await _context.SaveChangesAsync();
 
-            return schedule;
+            
         }
 
         public Task<List<Schedule>> GetAll()

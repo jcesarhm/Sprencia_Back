@@ -25,6 +25,8 @@ namespace SPRENCIA.Infraestructure.Contracts.DTOs
 
         public string Summary { get; set; }
 
+        public int  ScheduleId { get; set; }
+
 
 
       

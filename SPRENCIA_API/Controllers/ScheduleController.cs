@@ -59,14 +59,11 @@ namespace SPRENCIA_API.Controllers
 
         public async Task<ActionResult> DeleteScheduleById(int scheduleId)
         {
-            Schedule? schedule = await _scheduleService.DeleteScheduleById(scheduleId);
+          await _scheduleService.DeleteScheduleById(scheduleId);
 
-            if (schedule == null)
-            {
-                return BadRequest(" la peticion es incorrecta");
-            }
+            
 
-            return Ok(schedule);
+            return Ok();
 
         }
     }

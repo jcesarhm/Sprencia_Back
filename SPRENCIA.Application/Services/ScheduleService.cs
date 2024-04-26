@@ -27,15 +27,15 @@ namespace SPRENCIA.Application.Services
             return scheduleAdded;
         }
 
-        public async Task<Schedule> DeleteScheduleById(int scheduleId)
+        public async Task DeleteScheduleById(int? scheduleId)
         {
-            Schedule scheduleDelete = null;
+           
             if (scheduleId != null)
             {
-                scheduleDelete = await _scheduleRepository.DeleteScheduleById(scheduleId);
+                await _scheduleRepository.DeleteScheduleById(scheduleId);
             }
 
-            return scheduleDelete;
+           
         }
 
         public async Task<List<Schedule>> GetAllSchedule()

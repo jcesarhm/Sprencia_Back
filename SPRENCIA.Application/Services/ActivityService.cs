@@ -8,18 +8,24 @@ namespace SPRENCIA.Application.Services
     public class ActivityService : IActivityService
     {
         private readonly IActivityRepository _activityRepository;
+       // private readonly IScheduleRepository _scheduleRepository;
         public ActivityService(IActivityRepository activityRepository)
         {
             // hacemos la conexion entre Services y Repository
             _activityRepository = activityRepository;
         }
+
+       /// public ActivityService(IScheduleRepository scheduleRepository)
+       // {
+        //    _scheduleRepository = scheduleRepository;
+      //  }
         public async Task<List<Activity>> GetAllActivities()
         {
             // llamamos al metodo repository que nos devuelva los datos que nos interesa
-            var AllActivities = await _activityRepository.GetAll();
+            var allActivities = await _activityRepository.GetAll();
             // await es para que la app espere la respuesta
 
-            return AllActivities;
+            return allActivities;
         }
 
         public async Task<ActivityDto> AddNewActivity(ActivityAddRequestDto newActivity)
@@ -33,9 +39,9 @@ namespace SPRENCIA.Application.Services
             return activityAdded;
         }
 
-        public async Task<Activity> GetActivityById(int activityId)
+        public async Task<ActivityDto> GetActivityById(int activityId)
         {
-            Activity activity = null;
+            ActivityDto activity = null;
             if (activityId != null) 
             { 
                 activity = await _activityRepository.GetActivityById(activityId);
@@ -44,15 +50,15 @@ namespace SPRENCIA.Application.Services
             return activity;
         }
 
-        public async Task<Activity> DeleteActivityById(int activityId)
+        public async Task DeleteActivityById(int? activityId)
         {
-            Activity activityDelete = null;
+     
             if (activityId != null)
             {
-                activityDelete = await _activityRepository.DeleteActivityById(activityId);
+               await _activityRepository.DeleteActivityById(activityId.Value);
             }
 
-            return activityDelete;
+          
         }
 
         public async Task<ActivityDto> ModifyActivityById(ActivityModifyRequestDto activityModifyRequestDto)
@@ -61,6 +67,11 @@ namespace SPRENCIA.Application.Services
             if (activityModifyRequestDto != null)
             {
                 activityModify = await _activityRepository.ModifyActivityById(activityModifyRequestDto);
+
+            
+                /// hacer una peticion Schdule al respositorio ( scheduleId ) 
+                /// 
+
             }
 
             return activityModify;
