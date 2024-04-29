@@ -5,20 +5,17 @@ using SPRENCIA.Infraestructure.Contracts.DTOs;
 
 namespace SPRENCIA.Application.Services
 {
-    public class ActivityService : IActivityService
+    public class ActivityService: IActivityService
     {
         private readonly IActivityRepository _activityRepository;
-       // private readonly IScheduleRepository _scheduleRepository;
-        public ActivityService(IActivityRepository activityRepository)
+        private readonly IScheduleRepository _scheduleRepository;
+        public ActivityService(IActivityRepository activityRepository, IScheduleRepository scheduleRepository)
         {
             // hacemos la conexion entre Services y Repository
             _activityRepository = activityRepository;
+            _scheduleRepository = scheduleRepository;
         }
-
-       /// public ActivityService(IScheduleRepository scheduleRepository)
-       // {
-        //    _scheduleRepository = scheduleRepository;
-      //  }
+             
         public async Task<List<Activity>> GetAllActivities()
         {
             // llamamos al metodo repository que nos devuelva los datos que nos interesa

@@ -1,4 +1,5 @@
 ﻿using SPRENCIA.CrossCutting.Configuration;
+using SPRENCIA.Infraestructure.Contracts;
 using System.Text;
 namespace SPRENCIA_API
 {
@@ -12,6 +13,8 @@ namespace SPRENCIA_API
                .AddEnvironmentVariables();
 
             Configuration = builder.Build();
+
+         
         }
 
         public IConfiguration Configuration { get; }
@@ -22,6 +25,7 @@ namespace SPRENCIA_API
         {
             services.AddMvc(option => option.EnableEndpointRouting = false);
 
+            
 
             services.AddSingleton<IConfiguration>(Configuration);
 
@@ -37,6 +41,7 @@ namespace SPRENCIA_API
             });
         }
 
+        
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostEnvironment env)
         {
@@ -58,6 +63,8 @@ namespace SPRENCIA_API
             app.UseHttpsRedirection();
             app.UseMvc();
         }
+
+        
     }
 
 }
