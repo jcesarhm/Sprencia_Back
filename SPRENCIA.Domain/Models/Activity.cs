@@ -19,7 +19,7 @@ namespace SPRENCIA.Domain.Models
         public DateTime Date { get; set; }
 
         [ForeignKey("ScheduleId")]
-        public int ScheduleId { get; set; }
+        public int? ScheduleId { get; set; }
         public Schedule Schedule { get; set; }
     }
 }
