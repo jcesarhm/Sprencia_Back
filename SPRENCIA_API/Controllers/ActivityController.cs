@@ -30,6 +30,7 @@ namespace SPRENCIA_API.Controllers
         public async Task<ActionResult<ActivityDto>> GetActivityById(int activityId)
         {
             var activityById = await _activityService.GetActivityById(activityId);
+       
             return Ok(activityById);
         }
 

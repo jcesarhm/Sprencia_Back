@@ -18,6 +18,6 @@ namespace SPRENCIA.Domain.Models
 
         [ForeignKey("ActivityId")]
         public int? ActivityId { get; set; }
-        public Activity Activity { get; set; }
+      
     }
 }
