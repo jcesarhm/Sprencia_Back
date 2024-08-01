@@ -16,7 +16,7 @@ namespace SPRENCIA_API.Controllers
             //Hacemos la conexion entre Controller y Service
             _commentService = commentService;
         }
-        [HttpGet]
+        [HttpGet("All")]
         public async Task<List<Comment>> GetAll() 
         {
             // Controladores solamente tiene que llamar a servicios.

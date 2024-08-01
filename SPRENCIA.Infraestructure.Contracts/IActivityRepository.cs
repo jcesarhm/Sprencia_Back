@@ -12,8 +12,8 @@ namespace SPRENCIA.Infraestructure.Contracts
 
         Task DeleteActivityById(int? ActivityId);
 
-        Task<ActivityDto> ModifyActivityById(ActivityModifyRequestDto activityModifyRequestDto);
+        Task<ActivityDto> ModifyActivityById(int activityId, ActivityModifyRequestDto activityModifyRequestDto);
 
-      
+        Task<List<Comment>> GetCommentsForActivity(int activityId); 
     }
 }

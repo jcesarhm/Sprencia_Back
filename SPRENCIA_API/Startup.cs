@@ -39,6 +39,17 @@ namespace SPRENCIA_API
                     Title = "Sprencia Gestión de Actividades"
                 });
             });
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy("NuevaPolitica", app =>
+                {
+                    app.AllowAnyOrigin()
+                    .AllowAnyHeader()
+                    .AllowAnyMethod();
+
+                });
+            });
         }
 
         
@@ -49,7 +60,7 @@ namespace SPRENCIA_API
             {
                 app.UseDeveloperExceptionPage();
             }
-
+            app.UseCors("NuevaPolitica");
             app.UseAuthentication();
             app.UseAuthorization();
 

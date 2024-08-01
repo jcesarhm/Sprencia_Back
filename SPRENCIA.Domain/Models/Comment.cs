@@ -13,6 +13,7 @@ namespace SPRENCIA.Domain.Models
         public string Detail { get; set; }
         [Required]
         public int Qualification { get; set; }
+
         public DateTime Date { get; set; }
 
         [ForeignKey("ActivityId")]

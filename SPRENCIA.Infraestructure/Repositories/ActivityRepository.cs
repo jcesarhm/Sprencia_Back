@@ -28,6 +28,11 @@ namespace SPRENCIA.Infraestructure.Repositories
             
         }
 
+        public async Task<List<Comment>> GetCommentsForActivity(int activityId)
+        {
+            return await _context.Comments.Where(c => c.ActivityId == activityId).ToListAsync();
+        }
+
         public  async Task<ActivityDto> AddActivity(ActivityAddRequestDto newActivity)
         {
             // Una vez recogido el formulario del front, hay que convertir en un objeto real, Activity
@@ -38,6 +43,8 @@ namespace SPRENCIA.Infraestructure.Repositories
             activity.Description = activityRequestDto.Description;
             activity.Prices = activityRequestDto.Prices;
             activity.Summary = activityRequestDto.Summary;
+            activity.Date = activityRequestDto.Date;
+         
             // Haciendo el AddAsync, entity Framework nos devuelve el objeto creado.
             var activityAdded = await _context.Activities.AddAsync(activity);
             _context.SaveChanges();// se actualiza la base de datos 
@@ -49,10 +56,9 @@ namespace SPRENCIA.Infraestructure.Repositories
             activityDto.Description = activityAdded.Entity.Description;
             activityDto.Prices = activityAdded.Entity.Prices;
             activityDto.Summary = activityAdded.Entity.Summary;
-
-
+            activityDto.Date = activityAdded.Entity.Date;
             return activityDto;
-
+        
         }
 
         public async Task<ActivityDto> GetActivityById(int activityId)
@@ -69,7 +75,8 @@ namespace SPRENCIA.Infraestructure.Repositories
             activityDto.Description = activity.Description;
             activityDto.Prices = activity.Prices;
             activityDto.Summary = activity.Summary;
-
+            activityDto.Date = activity.Date;
+            activityDto.Comments = activity.Comments;
 
             return activityDto;
         }
@@ -83,22 +90,22 @@ namespace SPRENCIA.Infraestructure.Repositories
            
         }
 
-        public async Task<ActivityDto> ModifyActivityById(ActivityModifyRequestDto activityModifyRequestDto)
+        public async Task<ActivityDto> ModifyActivityById(int activityId, ActivityModifyRequestDto activityModifyRequestDto)
         {
-           Activity? activityResult = _context.Activities.Where(x => x.Id == activityModifyRequestDto.Id).FirstOrDefault();
+           Activity? activityResult = _context.Activities.Where(x => x.Id == activityId).FirstOrDefault();
 
           
             activityResult.Name = activityModifyRequestDto.Name;
             activityResult.Description = activityModifyRequestDto.Description;
             activityResult.Prices = activityModifyRequestDto.Prices;
             activityResult.Summary = activityModifyRequestDto.Summary;
-      
+            activityResult.Date = activityModifyRequestDto.Date;
             _context.Activities.Update(activityResult);
             _context.SaveChanges();
             /// GetActivityById
             /// _context.Activities.Where(x => x.Id == activityModifyRequestDto.Id).FirstOrDefault();
 
-            Activity? activityModify = _context.Activities.Where(x => x.Id == activityModifyRequestDto.Id).FirstOrDefault();
+            Activity? activityModify = _context.Activities.Where(x => x.Id == activityId).FirstOrDefault();
 
             ActivityDto activityDto = new ActivityDto();
             activityDto.Id = activityModify.Id;
@@ -106,7 +113,8 @@ namespace SPRENCIA.Infraestructure.Repositories
             activityDto.Description = activityModify.Description;
             activityDto.Prices = activityModify.Prices;
             activityDto.Summary = activityModify.Summary;
-            activityDto.ScheduleId = activityModify.ScheduleId;
+            activityDto.ScheduleId = activityModify.ScheduleId;  
+            activityDto.Date = activityModify.Date;
             /// activity
 
             return activityDto;

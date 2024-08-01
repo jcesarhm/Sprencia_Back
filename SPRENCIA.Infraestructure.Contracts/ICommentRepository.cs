@@ -14,5 +14,7 @@ namespace SPRENCIA.Infraestructure.Contracts
         Task DeleteCommentById(int? commentId);
 
         Task<CommentDto> ModifyCommentById(CommentModifyRequestDto commentModifyRequestDto );
+
+
     }
 }

@@ -16,7 +16,7 @@ namespace SPRENCIA_API.Controllers
             //Hacemos la conexion entre Controller y Service
             _scheduleService = scheduleService;
         }
-        [HttpGet]
+        [HttpGet("All")]
         public async Task<List<Schedule>> GetAll() 
         {
             // Controladores solamente tiene que llamar a servicios.
@@ -26,10 +26,10 @@ namespace SPRENCIA_API.Controllers
             return getAllSchedule;
         }
 
-        [HttpGet("{scheduleId}")]
-        public async Task<ActionResult> GetScheduleById(int scheduleId)
+        [HttpGet("{id}")]
+        public async Task<ActionResult> GetScheduleById(int id)
         {
-            var scheduleById = _scheduleService.GetScheduleById(scheduleId);
+            var scheduleById = _scheduleService.GetScheduleById(id);
             return Ok(scheduleById);
         }
 
@@ -55,11 +55,11 @@ namespace SPRENCIA_API.Controllers
 
         }
 
-        [HttpDelete("{scheduleId}")]
+        [HttpDelete("{id}")]
 
-        public async Task<ActionResult> DeleteScheduleById(int scheduleId)
+        public async Task<ActionResult> DeleteScheduleById(int id)
         {
-          await _scheduleService.DeleteScheduleById(scheduleId);
+          await _scheduleService.DeleteScheduleById(id);
 
             
 

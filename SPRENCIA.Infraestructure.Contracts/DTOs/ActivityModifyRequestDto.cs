@@ -14,8 +14,6 @@ namespace SPRENCIA.Infraestructure.Contracts.DTOs
     /// </summary>
     public class ActivityModifyRequestDto
     {
-       
-        public int Id { get; set; }
 
         public string Name { get; set; }
 
@@ -28,7 +26,6 @@ namespace SPRENCIA.Infraestructure.Contracts.DTOs
         public int  ScheduleId { get; set; }
 
 
-
-      
+        public DateTime Date { get; set; }
     }
 }

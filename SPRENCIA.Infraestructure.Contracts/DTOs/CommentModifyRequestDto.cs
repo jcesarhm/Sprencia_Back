@@ -17,7 +17,5 @@ namespace SPRENCIA.Infraestructure.Contracts.DTOs
         public int Qualification { get; set; }
 
         public DateTime Date { get; set; }
-
-
     }
 }

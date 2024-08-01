@@ -16,7 +16,7 @@ namespace SPRENCIA_API.Controllers
             //Hacemos la conexion entre Controller y Service
             _activityService = activityService;
         }
-        [HttpGet]
+        [HttpGet("All")]
         public async Task<List<Activity>> GetAll()
         {
             // Controladores solamente tiene que llamar a servicios.
@@ -69,16 +69,12 @@ namespace SPRENCIA_API.Controllers
         }
 
         [HttpPut]
-        [Route("ModifyActivity")]
+        [Route("{activityId}")]
 
-        public async Task<ActionResult> ModifyActivityById([FromBody] ActivityModifyRequestDto activityModifyRequestDto)
+        public async Task<ActionResult> ModifyActivityById([FromRoute] int activityId, [FromBody] ActivityModifyRequestDto activityModifyRequestDto)
         {
-            ActivityDto? activityModify = await _activityService.ModifyActivityById(activityModifyRequestDto);
-            if (activityModify == null)
-            {
-                return BadRequest("la peticion es incorrecta");
-            }
-
+           ActivityDto? activityModify = await _activityService.ModifyActivityById(activityId, activityModifyRequestDto);
+           
             return Ok(activityModify);
         }
     }

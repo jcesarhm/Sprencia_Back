@@ -15,7 +15,7 @@ namespace SPRENCIA.Application.Services
             _activityRepository = activityRepository;
             _scheduleRepository = scheduleRepository;
         }
-             
+
         public async Task<List<Activity>> GetAllActivities()
         {
             // llamamos al metodo repository que nos devuelva los datos que nos interesa
@@ -42,9 +42,14 @@ namespace SPRENCIA.Application.Services
             if (activityId != null) 
             { 
                 activity = await _activityRepository.GetActivityById(activityId);
+
+                activity.Comments = await _activityRepository.GetCommentsForActivity(activityId);
+                //llamar a un metodo del respositorio que me recupere los comentarios de esta activityId en concreto,
+                // 2. agregamos al obj activity que es de tipo activityDto
             }
 
             return activity;
+
         }
 
         public async Task DeleteActivityById(int? activityId)
@@ -58,12 +63,12 @@ namespace SPRENCIA.Application.Services
           
         }
 
-        public async Task<ActivityDto> ModifyActivityById(ActivityModifyRequestDto activityModifyRequestDto)
+        public async Task<ActivityDto> ModifyActivityById(int activityId, ActivityModifyRequestDto activityModifyRequestDto)
         {
             ActivityDto? activityModify = null;
             if (activityModifyRequestDto != null)
             {
-                activityModify = await _activityRepository.ModifyActivityById(activityModifyRequestDto);
+                activityModify = await _activityRepository.ModifyActivityById(activityId, activityModifyRequestDto);
 
             
                 /// hacer una peticion Schdule al respositorio ( scheduleId ) 

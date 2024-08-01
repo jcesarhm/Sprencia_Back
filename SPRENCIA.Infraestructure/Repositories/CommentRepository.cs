@@ -23,31 +23,31 @@ namespace SPRENCIA.Infraestructure.Repositories
 
         }
 
+
         public async Task<CommentDto> AddComment(CommentAddRequestDto newComment)
         {
             CommentAddRequestDto commentAddRequestDto = newComment;
           Comment comment = new Comment();
-            comment.Date = commentAddRequestDto.Date;
             comment.ActivityId = commentAddRequestDto.ActivityId;
             comment.Qualification = commentAddRequestDto.Qualification;
             comment.Name = commentAddRequestDto.Name;
             comment.Detail = commentAddRequestDto.Detail;
-
+            comment.Date = commentAddRequestDto.Date;
             var commentAdded = _context.Comments.Add(comment);
             _context.SaveChanges();
 
             CommentDto commentDto = new CommentDto();   
             commentDto.Id = commentAdded.Entity.Id;
             commentDto.Name = commentAdded.Entity.Name;
-            commentDto.Date = commentAdded.Entity.Date;
             commentDto.ActivityId = commentAdded.Entity.ActivityId;
             commentDto.Detail = commentAdded.Entity.Detail;
             commentDto.Qualification = commentAdded.Entity.Qualification;
-
+            commentDto.Date = commentAdded.Entity.Date;
             return commentDto;
 
 
         }
+       
 
         public async Task<CommentDto> GetCommentById(int commentId)
         {
@@ -58,11 +58,10 @@ namespace SPRENCIA.Infraestructure.Repositories
 
             commentDto.Id = comment.Id;
             commentDto.Name = comment.Name;
-            commentDto.Date = comment.Date;
             commentDto.ActivityId = comment.ActivityId;
             commentDto.Detail = comment.Detail;
             comment.Qualification = comment.Qualification;
-
+            comment.Date = comment.Date;
             return commentDto;
         }
 
@@ -78,7 +77,7 @@ namespace SPRENCIA.Infraestructure.Repositories
         {
             Comment? commentResult = _context.Comments.Where(x => x.Id == commentModifyRequestDto.Id).FirstOrDefault();
 
-
+            commentResult.Date = commentModifyRequestDto.Date;
             commentResult.Name = commentModifyRequestDto.Name;
             commentResult.Detail = commentModifyRequestDto.Detail;
             commentResult.Qualification = commentModifyRequestDto.Qualification;
@@ -93,7 +92,7 @@ namespace SPRENCIA.Infraestructure.Repositories
             commentDto.Name = commentModifyRequestDto.Name;
             commentDto.Detail = commentModifyRequestDto.Detail;
             commentDto.Qualification = commentModifyRequestDto.Qualification;
-  
+            commentDto.Date = commentModifyRequestDto.Date;
 
             return commentDto;
         }

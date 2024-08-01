@@ -15,8 +15,10 @@ namespace SPRENCIA.Infraestructure.Contracts.DTOs
         public int Prices { get; set; }
         public string Summary { get; set; }
 
+        public DateTime Date { get; set; }
         public  int? ScheduleId { get; set; }
         public string ScheduleName { get; set; }
         
+        public List<Comment> Comments{ get; set; }
     }
 }

@@ -9,7 +9,7 @@ namespace SPRENCIA.Application.Contracts.Services
 
         Task<CommentDto> AddNewComment(CommentAddRequestDto newComment);
 
-        Task<CommentDto> GetCommentById(int commentId);
+       Task<CommentDto> GetCommentById(int commentId);
 
         Task DeleteCommentById(int? commentId);
 
