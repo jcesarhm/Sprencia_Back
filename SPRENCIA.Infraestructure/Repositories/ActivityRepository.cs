@@ -12,8 +12,8 @@ namespace SPRENCIA.Infraestructure.Repositories
         private readonly SprenciaDbContext _context;
 
         //Contexto
-        public ActivityRepository(SprenciaDbContext dbContext) 
-        { 
+        public ActivityRepository(SprenciaDbContext dbContext)
+        {
             _context = dbContext;
         }
 
@@ -21,17 +21,22 @@ namespace SPRENCIA.Infraestructure.Repositories
         {
             //Crear la Consulta LINQ
             var activities = await _context.Activities.ToListAsync();
-            
+
             /// mapear cada uno de los elemntos del array en un Dto.
-            
+
             return activities;
-            
+
         }
 
         public async Task<List<Comment>> GetCommentsForActivity(int activityId)
         {
             return await _context.Comments.Where(c => c.ActivityId == activityId).ToListAsync();
         }
+
+        //public async Task<List<Schedule>> GetSchedulesForActivity(int activityId)
+        //{
+          //  return await _context.Schedules.Where(c => c.ActivityId == activityId).ToListAsync();
+       // }
 
         public  async Task<ActivityDto> AddActivity(ActivityAddRequestDto newActivity)
         {
@@ -77,6 +82,7 @@ namespace SPRENCIA.Infraestructure.Repositories
             activityDto.Summary = activity.Summary;
             activityDto.Date = activity.Date;
             activityDto.Comments = activity.Comments;
+            //activityDto.Schedules = activity.Schedules;
 
             return activityDto;
         }
@@ -113,7 +119,7 @@ namespace SPRENCIA.Infraestructure.Repositories
             activityDto.Description = activityModify.Description;
             activityDto.Prices = activityModify.Prices;
             activityDto.Summary = activityModify.Summary;
-            activityDto.ScheduleId = activityModify.ScheduleId;  
+            //activityDto.Schedules = activityModify.Schedules;  
             activityDto.Date = activityModify.Date;
             /// activity
 

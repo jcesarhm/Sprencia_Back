@@ -44,6 +44,8 @@ namespace SPRENCIA.Application.Services
                 activity = await _activityRepository.GetActivityById(activityId);
 
                 activity.Comments = await _activityRepository.GetCommentsForActivity(activityId);
+
+                //activity.Schedules = await _activityRepository.GetSchedulesForActivity(activityId);
                 //llamar a un metodo del respositorio que me recupere los comentarios de esta activityId en concreto,
                 // 2. agregamos al obj activity que es de tipo activityDto
             }
