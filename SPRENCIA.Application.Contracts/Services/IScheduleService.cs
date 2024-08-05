@@ -5,11 +5,11 @@ namespace SPRENCIA.Application.Contracts.Services
 {
     public interface IScheduleService
     {
-        Task<List<Schedule>> GetAllSchedule();
+        Task<List<Schedule>>GetAllSchedules();
 
         Task<Schedule> GetScheduleById(int scheduleId);
 
-        Task<Schedule> AddNewSchedule(Schedule newSchedule);
+        Task<ScheduleDto> AddNewSchedule(ScheduleAddRequestDto newSchedule);
 
         Task DeleteScheduleById(int? scheduleId);
     }

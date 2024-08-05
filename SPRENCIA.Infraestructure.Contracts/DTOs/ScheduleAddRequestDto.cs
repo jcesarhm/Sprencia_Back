@@ -6,12 +6,8 @@ using System.Threading.Tasks;
 
 namespace SPRENCIA.Infraestructure.Contracts.DTOs
 {
-    public class ScheduleDto
+    public class ScheduleAddRequestDto
     {
-        public int Id { get; set; }
-
         public string Name { get; set; }
-
-    
     }
 }

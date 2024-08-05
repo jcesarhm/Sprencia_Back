@@ -21,7 +21,7 @@ namespace SPRENCIA_API.Controllers
         {
             // Controladores solamente tiene que llamar a servicios.
             // No debe de hacer ninguna operacion.
-            var getAllSchedule = await _scheduleService.GetAllSchedule();
+            var getAllSchedule = await _scheduleService.GetAllSchedules();
 
             return getAllSchedule;
         }
@@ -36,7 +36,7 @@ namespace SPRENCIA_API.Controllers
         [HttpPost]
         [Route("AddSchedule")]
         //REcuerda poner el ActionResult
-        public async Task<ActionResult> AddNewSchedule([FromBody] Schedule schedule)
+        public async Task<ActionResult> AddNewSchedule([FromBody] ScheduleAddRequestDto schedule)
         {
             var scheduleAdded = await _scheduleService.AddNewSchedule(schedule);
 

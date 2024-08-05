@@ -15,9 +15,9 @@ namespace SPRENCIA.Application.Services
           _scheduleRepository = scheduleRepository;
         }
 
-        public async Task<Schedule> AddNewSchedule(Schedule newSchedule)
+        public async Task<ScheduleDto> AddNewSchedule(ScheduleAddRequestDto newSchedule)
         {
-            Schedule? scheduleAdded = null;
+            ScheduleDto? scheduleAdded = null;
 
             if (newSchedule != null)
             {
@@ -38,11 +38,11 @@ namespace SPRENCIA.Application.Services
            
         }
 
-        public async Task<List<Schedule>> GetAllSchedule()
+        public async Task<List<Schedule>> GetAllSchedules()
         {
-            var AllSchedule = await _scheduleRepository.GetAll();
+            var AllSchedules = await _scheduleRepository.GetAll();
 
-            return AllSchedule;
+            return AllSchedules;
         }
 
         public  async Task<Schedule> GetScheduleById(int scheduleId)

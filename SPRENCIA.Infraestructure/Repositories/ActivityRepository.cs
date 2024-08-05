@@ -33,10 +33,7 @@ namespace SPRENCIA.Infraestructure.Repositories
             return await _context.Comments.Where(c => c.ActivityId == activityId).ToListAsync();
         }
 
-        //public async Task<List<Schedule>> GetSchedulesForActivity(int activityId)
-        //{
-          //  return await _context.Schedules.Where(c => c.ActivityId == activityId).ToListAsync();
-       // }
+       
 
         public  async Task<ActivityDto> AddActivity(ActivityAddRequestDto newActivity)
         {

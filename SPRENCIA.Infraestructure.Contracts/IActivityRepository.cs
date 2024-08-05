@@ -14,8 +14,7 @@ namespace SPRENCIA.Infraestructure.Contracts
 
         Task<ActivityDto> ModifyActivityById(int activityId, ActivityModifyRequestDto activityModifyRequestDto);
 
-        Task<List<Comment>> GetCommentsForActivity(int activityId); 
-
-      // Task<List<Schedule>> GetSchedulesForActivity(int activityId);
+        Task<List<Comment>> GetCommentsForActivity(int activityId);
+        //Task<ScheduleDto> GetScheduleForActivity(int activityId);
     }
 }

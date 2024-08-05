@@ -9,7 +9,7 @@ namespace SPRENCIA.Infraestructure.Contracts
 
         Task<Schedule> GetScheduleById(int ScheduleId);
 
-        Task<Schedule> AddSchedule(Schedule newSchedule);
+        Task<ScheduleDto> AddSchedule(ScheduleAddRequestDto newSchedule);
 
         Task DeleteScheduleById(int? scheduleId);
      
