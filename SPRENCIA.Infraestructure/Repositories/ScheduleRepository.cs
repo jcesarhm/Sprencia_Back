@@ -15,6 +15,12 @@ namespace SPRENCIA.Infraestructure.Repositories
             _context = dbcontext;
         }
 
+         public async Task<List<Schedule>> GetAll()
+ {
+     var schedules =  await _context.Schedules.ToListAsync();
+
+     return schedules;
+ }
         public async Task<ScheduleDto> AddSchedule(ScheduleAddRequestDto newSchedule)
         {
             ScheduleAddRequestDto scheduleAddRequestDto = newSchedule;
@@ -42,12 +48,7 @@ namespace SPRENCIA.Infraestructure.Repositories
             
         }
 
-        public async Task<List<Schedule>> GetAll()
-        {
-            var schedules =  await _context.Schedules.ToListAsync();
-
-            return schedules;
-        }
+       
 
         public async Task<Schedule> GetScheduleById(int ScheduleId)
         {
@@ -57,5 +58,15 @@ namespace SPRENCIA.Infraestructure.Repositories
 
             return schedule;
         }
+
+        public async Task<Schedule> GetActivityBySchedule(int ScheduleId)
+        {
+
+            Schedule? schedule = await _context.Schedules.FindAsync(ScheduleId);
+            return schedule;
+
+           
+
+        }         
     }
 }

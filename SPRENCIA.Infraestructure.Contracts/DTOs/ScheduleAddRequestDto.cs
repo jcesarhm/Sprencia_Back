@@ -8,6 +8,7 @@ namespace SPRENCIA.Infraestructure.Contracts.DTOs
 {
     public class ScheduleAddRequestDto
     {
+       
         public string Name { get; set; }
     }
 }

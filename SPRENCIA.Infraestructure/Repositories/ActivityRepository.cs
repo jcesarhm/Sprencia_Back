@@ -33,10 +33,11 @@ namespace SPRENCIA.Infraestructure.Repositories
             return await _context.Comments.Where(c => c.ActivityId == activityId).ToListAsync();
         }
 
-       
+        
 
         public  async Task<ActivityDto> AddActivity(ActivityAddRequestDto newActivity)
         {
+            var schedule = await _context.Schedules.FindAsync(newActivity.scheduleId);
             // Una vez recogido el formulario del front, hay que convertir en un objeto real, Activity
             ActivityAddRequestDto activityRequestDto = newActivity;
 
@@ -46,6 +47,7 @@ namespace SPRENCIA.Infraestructure.Repositories
             activity.Prices = activityRequestDto.Prices;
             activity.Summary = activityRequestDto.Summary;
             activity.Date = activityRequestDto.Date;
+            activity.ScheduleId = activityRequestDto.scheduleId;
          
             // Haciendo el AddAsync, entity Framework nos devuelve el objeto creado.
             var activityAdded = await _context.Activities.AddAsync(activity);
@@ -59,29 +61,17 @@ namespace SPRENCIA.Infraestructure.Repositories
             activityDto.Prices = activityAdded.Entity.Prices;
             activityDto.Summary = activityAdded.Entity.Summary;
             activityDto.Date = activityAdded.Entity.Date;
+            activityDto.ScheduleName = activityAdded.Entity.ScheduleId;
             return activityDto;
         
         }
 
-        public async Task<ActivityDto> GetActivityById(int activityId)
+        public async Task<Activity> GetActivityById(int activityId)
         {
             Activity? activity = _context.Activities.Where(x => x.Id == activityId).FirstOrDefault();
 
-            ActivityDto activityDto = new ActivityDto();
-            if(activity == null)
-            {
-                return null;
-            }
-            activityDto.Id = activity.Id;
-            activityDto.Name = activity.Name;
-            activityDto.Description = activity.Description;
-            activityDto.Prices = activity.Prices;
-            activityDto.Summary = activity.Summary;
-            activityDto.Date = activity.Date;
-            activityDto.Comments = activity.Comments;
-            //activityDto.Schedules = activity.Schedules;
 
-            return activityDto;
+            return activity;
         }
 
         public async Task DeleteActivityById(int? activityId)
@@ -124,5 +114,7 @@ namespace SPRENCIA.Infraestructure.Repositories
         
 
         }
+
+      
     }
 }

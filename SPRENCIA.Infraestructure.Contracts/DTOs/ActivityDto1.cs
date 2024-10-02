@@ -1,25 +1,22 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using SPRENCIA.Domain.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace SPRENCIA.Domain.Models
+namespace SPRENCIA.Infraestructure.Contracts.DTOs
 {
-    public class Activity
+    public class ActivityDto1
     {
-        [Key]
         public int Id { get; set; }
-        [Required]
         public string Name { get; set; }
-        [Required]
         public string Description { get; set; }
-
         public int Prices { get; set; }
-
         public string Summary { get; set; }
 
         public DateTime Date { get; set; }
-     
-        public int  ScheduleId { get; set; }
-
+        public string ScheduleName { get; set; }
 
         public List<Comment> Comments { get; set; }
     }

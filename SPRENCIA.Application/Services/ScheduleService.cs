@@ -2,7 +2,6 @@
 using SPRENCIA.Domain.Models;
 using SPRENCIA.Infraestructure.Contracts;
 using SPRENCIA.Infraestructure.Contracts.DTOs;
-using System.ComponentModel.Design;
 
 namespace SPRENCIA.Application.Services
 {
@@ -40,9 +39,9 @@ namespace SPRENCIA.Application.Services
 
         public async Task<List<Schedule>> GetAllSchedules()
         {
-            var AllSchedules = await _scheduleRepository.GetAll();
+            var allSchedules = await _scheduleRepository.GetAll();
 
-            return AllSchedules;
+            return allSchedules;
         }
 
         public  async Task<Schedule> GetScheduleById(int scheduleId)

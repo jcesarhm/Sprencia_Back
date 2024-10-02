@@ -36,22 +36,35 @@ namespace SPRENCIA.Application.Services
             return activityAdded;
         }
 
-        public async Task<ActivityDto> GetActivityById(int activityId)
+        public async Task<ActivityDto1> GetActivityById(int activityId)
         {
-            ActivityDto activity = null;
-            if (activityId != null) 
+            Activity activity = null ;
+            if (activityId  != null ) 
             { 
                 activity = await _activityRepository.GetActivityById(activityId);
 
                 activity.Comments = await _activityRepository.GetCommentsForActivity(activityId);
 
-               //activity.Schedule = await _activityRepository.GetScheduleForActivity(activityId);
-                //llamar a un metodo del respositorio que me recupere los comentarios de esta activityId en concreto,
-                // 2. agregamos al obj activity que es de tipo activityDto
+                var schedule = await _scheduleRepository.GetActivityBySchedule(activity.ScheduleId);
+
+            ActivityDto1 activityDto1 = new ActivityDto1();
+                if (activity == null)
+                {
+                    return null;
+                }
+                activityDto1.Id = activity.Id;
+                activityDto1.Name = activity.Name;
+                activityDto1.Description = activity.Description;
+                activityDto1.Prices = activity.Prices;
+                activityDto1.Summary = activity.Summary;
+                activityDto1.Date = activity.Date;
+                activityDto1.Comments = activity.Comments;
+                activityDto1.ScheduleName = schedule.Name;
+
+            return activityDto1;
             }
 
-            return activity;
-
+            return null;
         }
 
         public async Task DeleteActivityById(int? activityId)
